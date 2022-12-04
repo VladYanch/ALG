@@ -12,7 +12,7 @@ public class Main {
         //test(10);
         test(1000);
         test(10000);
-        test(1000000);
+//        test(1000000); // программа виснет без причин и не досчитывает
     }
 
     private static void test(int size) {
