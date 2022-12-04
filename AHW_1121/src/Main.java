@@ -1,48 +1,64 @@
 public class Main {
     public static void main(String[] args) {
         //1
-        System.out.println(xinRec(2,10, 1));
+        System.out.println(xinRec(2,10));
         //2
-        System.out.println(xin2(2,4));
+        System.out.println(xin2(2,5));
+
+        System.out.println(powerRecImproved(2, 5));
 
         //3
         int[] a =  {100,112,256,349,770};
         int[] b = {72,86,113,119,265,445,892};
-        System.out.println(finder(a,b,7));
+//        System.out.println(finder(a,b,7));
 
         //4 не доделал
         int arr[] = {1, 1, 2, 2, 2, 2, 3,};
-        System.out.println(repeatCount(arr,2));
+//        System.out.println(repeatCount(arr,2));
+
+
 
     }
 
 //     1. Даны два целых числа x и n, напишите функцию для вычисления x^n
 //        решение 1 - рекурсивно O(n)
 //        решение 2 - улучшить решение 1 до O(lon n)
-    public static int xinRec(int a,int b, int res) {
-        if (b == 0) {
-            return 1;
-        } else if (b == 1) {
-            return a;
-        }
-        int counter = b;
-        if (counter == 1) {
-            return res;
-        } else {
-            counter--;
-            res = a * xinRec(a, counter, res);
+
+    public static int xin2(int x,int n) {
+        int res = x;
+        for (int i = 1; i < n; i++) {
+            res = res * x;
         }
         return res;
+    }
+    public static int xinRec(int x,int n) {
+        if (n == 0) {
+            return 1;
+        }
+        return x * xinRec(x, n-1);
     }
 
 // решение 2 - улучшить решение 1 до O(lon n)
-    public static int xin2(int a,int b) {
-        int res=1;
-        for (int i = 1; i <= b; i++) {
-            res = res * a;
+        static long powerRecImproved(int x, int n) {
+            if (n == 0) {
+                return 1;
+            }
+            // Получение значение, равное x в степени n / 2
+            // Выполнить проверку n на четность
+            // Если n четное, возвести полученное число в квадрат
+            // В противном случае возвести в квадрат и умножить на x
+
+            //x^n
+            //x^n * x = x^(n+1)
+            //x^a * x^b = x^(a + b)
+            long half = powerRecImproved(x, n/2);
+            if (n % 2 == 0) {
+                return half * half;
+            } else {
+                return half * half * x;
+            }
         }
-        return res;
-    }
+
 //        Имея два отсортированных массива размера m и n соответственно, вам нужно найти элемент, который будет находиться на k-й позиции в конечном отсортированном массиве.
 //        Массив 1 - 100 112 256 349 770
 //        Массив 2 - 72 86 113 119 265 445 892
