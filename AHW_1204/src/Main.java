@@ -9,14 +9,14 @@ public class Main {
      */
 
     public static void main(String[] args) {
-        //test(10);
+        test(10);
         test(1000);
-        test(10000);
-//        test(1000000); // программа виснет без причин и не досчитывает
+        test(100000);
+        test(1000000); // программа виснет без причин и не досчитывает
     }
 
     private static void test(int size) {
-        Random r = new Random();
+        Random r = new Random(100);
 
         int[] arr = new int[size];
         int[] arrCopy = new int[size];
@@ -24,7 +24,7 @@ public class Main {
             arr[i] = r.nextInt() % size;
             arrCopy[i] = arr[i];
         }
-//        System.out.println(Arrays.toString(arr));
+        System.out.println(Arrays.toString(arr));
 
         long start;
         long stop;
@@ -34,7 +34,7 @@ public class Main {
         start = System.nanoTime();
         bubbleCount = bubbleSort(arr);
         stop = System.nanoTime();
-//        System.out.println(Arrays.toString(arr));
+        System.out.println(Arrays.toString(arr));
 
         System.out.println("Bubble sort, size " + size +  " count " + bubbleCount + " time= "+ ((stop - start) / 1_000_000_000.0));
 
@@ -62,9 +62,10 @@ public class Main {
                     int tmp = arr[j];
                     arr[j] = arr[j + 1];
                     arr[j + 1] = tmp;
+                    count += 1;
                 }
             }
         }
-        return count += 1;
+        return count;
     }
 }
